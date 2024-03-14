@@ -77,7 +77,8 @@ message GetGoodsRequest{
 }
 
 message GetGoodsResponse{
- repeated  GoodsInfo Info =10;
+  int64    Pages          = 10;
+ repeated  GoodsInfo Info = 20;
 }
 
 
