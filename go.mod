@@ -1,4 +1,4 @@
-module 2108a-zg5/week3/shop/message
+module github.com/1zhangfei/shop-message
 
 go 1.21.4
 
