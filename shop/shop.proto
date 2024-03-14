@@ -9,6 +9,7 @@ message GoodsInfo {
     string GoodsName   = 20;
     string Image       = 30;
     string GoodsType   = 40;
+    string Title       = 50;
 }
 
 message Norm{
