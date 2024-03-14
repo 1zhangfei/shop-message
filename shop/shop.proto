@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+package shop;
+option go_package="./shop";
+
+
+message GoodsInfo {
+    int64  ID          = 10;
+    string GoodsName   = 20;
+    string Image       = 30;
+    string GoodsType   = 40;
+}
+
+message Norm{
+    string   NormName = 10;
+repeated string Value = 20;
+}
+
+message Norms{//规格
+  int64         ID      = 10;
+repeated  Norm NormInfo = 20;
+}
+
+message Sku{
+  int64  SkuId = 10;
+  string Price = 20;
+  int64  Stock = 30;
+}
+
+message SkuInfo{
+  repeated Sku Info = 10;
+}
+
+
+message GoodsSkuInfo {
+
+ repeated Norm  Norm = 20;
+}
+
+
+
+message CreateGoodsRequest {
+  GoodsInfo Info = 10;
+}
+
+message CreateGoodsResponse {
+  GoodsInfo Info = 10;
+}
+
+
+
+message CreateSkuGoodsRequest{
+  Norms Info = 10;
+}
+
+message CreateSkuGoodsResponse{
+ repeated  int64 NormIdOne = 10;
+}
+
+
+
+message CreateSkuRequest{
+    SkuInfo Info = 10;
+}
+
+message CreateSkuResponse{
+repeated int64  SkuId = 10;
+}
+
+
+
+message GetGoodsRequest{
+  int64 Offset = 10;
+  int64 Limit  = 20;
+}
+
+message GetGoodsResponse{
+ repeated  GoodsInfo Info =10;
+}
+
+
+message GetGoodsSkuRequest {
+    int64 GoodsId = 10;
+}
+
+message GetGoodsSkuResponse{
+    GoodsSkuInfo Info = 10;
+}
+
+
+message UpdateGoodsRequest{
+    GoodsInfo Info = 10;
+}
+
+message UpdateGoodsResponse{
+   GoodsInfo Info = 10;
+}
+
+
+
+message UpdateSkuRequest{
+repeated    Sku Info = 10;
+}
+
+message UpdateSkuResponse{
+ repeated   Sku Info =10;
+}
+
+
+message DeleteGoodsRequest{
+    int64 GoodsId = 10;
+}
+
+message DeleteGoodsResponse{}
+
+
+
+service Shop {
+  rpc CreateGoods(CreateGoodsRequest) returns(CreateGoodsResponse);
+  rpc CreateNorm(CreateSkuGoodsRequest) returns(CreateSkuGoodsResponse);
+  rpc CreateSku(CreateSkuRequest)  returns(CreateSkuResponse);
+  rpc GetGoods(GetGoodsRequest) returns(GetGoodsResponse);
+  rpc GetGoodsSku(GetGoodsSkuRequest) returns(GetGoodsSkuResponse);
+  rpc UpdateGoods(UpdateGoodsRequest) returns(UpdateGoodsResponse);
+  rpc UpdateSku(UpdateSkuRequest) returns(UpdateSkuResponse);
+  rpc DeleteGoods(DeleteGoodsRequest) returns(DeleteGoodsResponse);
+}
