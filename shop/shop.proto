@@ -33,9 +33,11 @@ message SkuInfo{
 }
 
 
-message GoodsSkuInfo {
-
- repeated Norm  Norm = 20;
+message ProductInfo{
+    int64  ID        = 10;
+    string GoodsName = 20;
+    string Image     = 30;
+    Norm   Info      = 40;
 }
 
 
@@ -69,7 +71,6 @@ repeated int64  SkuId = 10;
 }
 
 
-
 message GetGoodsRequest{
   int64 Offset = 10;
   int64 Limit  = 20;
@@ -85,7 +86,7 @@ message GetGoodsSkuRequest {
 }
 
 message GetGoodsSkuResponse{
-    GoodsSkuInfo Info = 10;
+  ProductInfo Info = 10;
 }
 
 
@@ -98,9 +99,8 @@ message UpdateGoodsResponse{
 }
 
 
-
 message UpdateSkuRequest{
-repeated    Sku Info = 10;
+  repeated   Sku Info = 10;
 }
 
 message UpdateSkuResponse{
