@@ -44,9 +44,10 @@ repeated  NormInfo Info = 10;
 message ProductInfo{
   int64         ID        = 10;
   string        GoodsName = 20;
+  string        Title     = 21;
   string        Image     = 30;
   string       GoodsType  = 40;
-  repeated Product Info      = 50;
+  repeated Product Info   = 50;
 }
 
 message SkuInfos{
