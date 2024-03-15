@@ -28,9 +28,6 @@ message Sku{
   int64  Stock = 30;
 }
 
-message SkuInfo{
-  repeated Sku Info = 10;
-}
 
 message NormInfo{
   int64  NormId   = 10;
@@ -69,19 +66,18 @@ message CreateGoodsResponse {
 }
 
 
-
-message CreateSkuGoodsRequest{
-  Norms Info = 10;
+message CreateNormGoodsRequest{
+   Norms Info = 10;
 }
 
-message CreateSkuGoodsResponse{
- repeated  int64 NormIdOne = 10;
+message CreateNormGoodsResponse{
+  repeated Sku Info = 10;
 }
 
 
 
 message CreateSkuRequest{
-    SkuInfo Info = 10;
+repeated  Sku Info = 10;
 }
 
 message CreateSkuResponse{
@@ -109,15 +105,6 @@ message GetGoodsInfoResponse{
 }
 
 
-message GetGoodsSkuRequest{
-  int64 GoodsId = 10;
-}
-
-
-message GetGoodsSkuResponse{
-  repeated SkuInfos Info = 10;
-}
-
 
 message UpdateGoodsRequest{
     GoodsInfo Info = 10;
@@ -129,7 +116,7 @@ message UpdateGoodsResponse{
 
 
 message UpdateSkuRequest{
-  repeated   Sku Info = 10;
+  repeated  Sku Info = 10;
 }
 
 message UpdateSkuResponse{
@@ -147,12 +134,9 @@ message DeleteGoodsResponse{}
 
 service Shop {
   rpc CreateGoods(CreateGoodsRequest) returns(CreateGoodsResponse);
-  rpc CreateNorm(CreateSkuGoodsRequest) returns(CreateSkuGoodsResponse);
+  rpc CreateNorm(CreateNormGoodsRequest) returns(CreateNormGoodsResponse);
   rpc CreateSku(CreateSkuRequest)  returns(CreateSkuResponse);
   rpc GetGoods(GetGoodsRequest) returns(GetGoodsResponse);
   rpc GetGoodsInfo(GetGoodsInfoRequest) returns(GetGoodsInfoResponse);
-  rpc GetGoodsSku(GetGoodsSkuRequest) returns(GetGoodsSkuResponse);
-  rpc UpdateGoods(UpdateGoodsRequest) returns(UpdateGoodsResponse);
-  rpc UpdateSku(UpdateSkuRequest) returns(UpdateSkuResponse);
   rpc DeleteGoods(DeleteGoodsRequest) returns(DeleteGoodsResponse);
 }
