@@ -28,15 +28,18 @@ message Sku{
   int64  Stock = 30;
 }
 
-
-
-message Product {
+message NormVal{
   int64  NormId   = 10;
   string NormName = 20;
   int64  NormsID  = 30;
   string Value    = 40;
-  string Price    = 50;
-  int64  Stock    = 60;
+}
+
+message Product {
+   int64  SkuId       = 10;
+repeated NormVal Info = 20;
+   string Price       = 50;
+   int64  Stock       = 60;
 }
 
 message ProductInfo{
