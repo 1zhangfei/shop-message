@@ -19,14 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Shop_CreateGoods_FullMethodName = "/shop.Shop/CreateGoods"
-	Shop_CreateNorm_FullMethodName  = "/shop.Shop/CreateNorm"
-	Shop_CreateSku_FullMethodName   = "/shop.Shop/CreateSku"
-	Shop_GetGoods_FullMethodName    = "/shop.Shop/GetGoods"
-	Shop_GetGoodsSku_FullMethodName = "/shop.Shop/GetGoodsSku"
-	Shop_UpdateGoods_FullMethodName = "/shop.Shop/UpdateGoods"
-	Shop_UpdateSku_FullMethodName   = "/shop.Shop/UpdateSku"
-	Shop_DeleteGoods_FullMethodName = "/shop.Shop/DeleteGoods"
+	Shop_CreateGoods_FullMethodName  = "/shop.Shop/CreateGoods"
+	Shop_CreateNorm_FullMethodName   = "/shop.Shop/CreateNorm"
+	Shop_CreateSku_FullMethodName    = "/shop.Shop/CreateSku"
+	Shop_GetGoods_FullMethodName     = "/shop.Shop/GetGoods"
+	Shop_GetGoodsInfo_FullMethodName = "/shop.Shop/GetGoodsInfo"
+	Shop_GetGoodsSku_FullMethodName  = "/shop.Shop/GetGoodsSku"
+	Shop_UpdateGoods_FullMethodName  = "/shop.Shop/UpdateGoods"
+	Shop_UpdateSku_FullMethodName    = "/shop.Shop/UpdateSku"
+	Shop_DeleteGoods_FullMethodName  = "/shop.Shop/DeleteGoods"
 )
 
 // ShopClient is the client API for Shop service.
@@ -37,6 +38,7 @@ type ShopClient interface {
 	CreateNorm(ctx context.Context, in *CreateSkuGoodsRequest, opts ...grpc.CallOption) (*CreateSkuGoodsResponse, error)
 	CreateSku(ctx context.Context, in *CreateSkuRequest, opts ...grpc.CallOption) (*CreateSkuResponse, error)
 	GetGoods(ctx context.Context, in *GetGoodsRequest, opts ...grpc.CallOption) (*GetGoodsResponse, error)
+	GetGoodsInfo(ctx context.Context, in *GetGoodsInfoRequest, opts ...grpc.CallOption) (*GetGoodsInfoResponse, error)
 	GetGoodsSku(ctx context.Context, in *GetGoodsSkuRequest, opts ...grpc.CallOption) (*GetGoodsSkuResponse, error)
 	UpdateGoods(ctx context.Context, in *UpdateGoodsRequest, opts ...grpc.CallOption) (*UpdateGoodsResponse, error)
 	UpdateSku(ctx context.Context, in *UpdateSkuRequest, opts ...grpc.CallOption) (*UpdateSkuResponse, error)
@@ -87,6 +89,15 @@ func (c *shopClient) GetGoods(ctx context.Context, in *GetGoodsRequest, opts ...
 	return out, nil
 }
 
+func (c *shopClient) GetGoodsInfo(ctx context.Context, in *GetGoodsInfoRequest, opts ...grpc.CallOption) (*GetGoodsInfoResponse, error) {
+	out := new(GetGoodsInfoResponse)
+	err := c.cc.Invoke(ctx, Shop_GetGoodsInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *shopClient) GetGoodsSku(ctx context.Context, in *GetGoodsSkuRequest, opts ...grpc.CallOption) (*GetGoodsSkuResponse, error) {
 	out := new(GetGoodsSkuResponse)
 	err := c.cc.Invoke(ctx, Shop_GetGoodsSku_FullMethodName, in, out, opts...)
@@ -131,6 +142,7 @@ type ShopServer interface {
 	CreateNorm(context.Context, *CreateSkuGoodsRequest) (*CreateSkuGoodsResponse, error)
 	CreateSku(context.Context, *CreateSkuRequest) (*CreateSkuResponse, error)
 	GetGoods(context.Context, *GetGoodsRequest) (*GetGoodsResponse, error)
+	GetGoodsInfo(context.Context, *GetGoodsInfoRequest) (*GetGoodsInfoResponse, error)
 	GetGoodsSku(context.Context, *GetGoodsSkuRequest) (*GetGoodsSkuResponse, error)
 	UpdateGoods(context.Context, *UpdateGoodsRequest) (*UpdateGoodsResponse, error)
 	UpdateSku(context.Context, *UpdateSkuRequest) (*UpdateSkuResponse, error)
@@ -153,6 +165,9 @@ func (UnimplementedShopServer) CreateSku(context.Context, *CreateSkuRequest) (*C
 }
 func (UnimplementedShopServer) GetGoods(context.Context, *GetGoodsRequest) (*GetGoodsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGoods not implemented")
+}
+func (UnimplementedShopServer) GetGoodsInfo(context.Context, *GetGoodsInfoRequest) (*GetGoodsInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGoodsInfo not implemented")
 }
 func (UnimplementedShopServer) GetGoodsSku(context.Context, *GetGoodsSkuRequest) (*GetGoodsSkuResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGoodsSku not implemented")
@@ -251,6 +266,24 @@ func _Shop_GetGoods_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Shop_GetGoodsInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGoodsInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShopServer).GetGoodsInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Shop_GetGoodsInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShopServer).GetGoodsInfo(ctx, req.(*GetGoodsInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Shop_GetGoodsSku_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetGoodsSkuRequest)
 	if err := dec(in); err != nil {
@@ -345,6 +378,10 @@ var Shop_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGoods",
 			Handler:    _Shop_GetGoods_Handler,
+		},
+		{
+			MethodName: "GetGoodsInfo",
+			Handler:    _Shop_GetGoodsInfo_Handler,
 		},
 		{
 			MethodName: "GetGoodsSku",

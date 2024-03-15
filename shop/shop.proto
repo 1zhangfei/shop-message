@@ -32,14 +32,32 @@ message SkuInfo{
   repeated Sku Info = 10;
 }
 
-
-message ProductInfo{
-    int64  ID        = 10;
-    string GoodsName = 20;
-    string Image     = 30;
-    Norm   Info      = 40;
+message NormInfo{
+  int64  NormId   = 10;
+  string NormName = 20;
+  int64  NormsID  = 30;
+  string Value    = 40;
+}
+message Product {
+repeated  NormInfo Info = 10;
+  string Price  = 20;
+  int64  Stock  = 30;
 }
 
+message ProductInfo{
+  int64         ID        = 10;
+  string        GoodsName = 20;
+  string        Image     = 30;
+  string       GoodsType  = 40;
+  repeated Product Info      = 50;
+}
+
+message SkuInfos{
+  int64  ID          = 10;
+  string NormsOne    = 20;
+  string NormsTwo    = 30;
+  string NormsThree  = 40;
+}
 
 
 message CreateGoodsRequest {
@@ -82,12 +100,22 @@ message GetGoodsResponse{
 }
 
 
-message GetGoodsSkuRequest {
+message GetGoodsInfoRequest {
     int64 GoodsId = 10;
 }
 
-message GetGoodsSkuResponse{
+message GetGoodsInfoResponse{
   ProductInfo Info = 10;
+}
+
+
+message GetGoodsSkuRequest{
+  int64 GoodsId = 10;
+}
+
+
+message GetGoodsSkuResponse{
+  repeated SkuInfos Info = 10;
 }
 
 
@@ -122,6 +150,7 @@ service Shop {
   rpc CreateNorm(CreateSkuGoodsRequest) returns(CreateSkuGoodsResponse);
   rpc CreateSku(CreateSkuRequest)  returns(CreateSkuResponse);
   rpc GetGoods(GetGoodsRequest) returns(GetGoodsResponse);
+  rpc GetGoodsInfo(GetGoodsInfoRequest) returns(GetGoodsInfoResponse);
   rpc GetGoodsSku(GetGoodsSkuRequest) returns(GetGoodsSkuResponse);
   rpc UpdateGoods(UpdateGoodsRequest) returns(UpdateGoodsResponse);
   rpc UpdateSku(UpdateSkuRequest) returns(UpdateSkuResponse);
