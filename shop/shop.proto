@@ -71,7 +71,7 @@ message CreateNormGoodsRequest{
 }
 
 message CreateNormGoodsResponse{
-  repeated Sku Info = 10;
+  repeated SkuInfos Info = 10;
 }
 
 
@@ -102,25 +102,6 @@ message GetGoodsInfoRequest {
 
 message GetGoodsInfoResponse{
   ProductInfo Info = 10;
-}
-
-
-
-message UpdateGoodsRequest{
-    GoodsInfo Info = 10;
-}
-
-message UpdateGoodsResponse{
-   GoodsInfo Info = 10;
-}
-
-
-message UpdateSkuRequest{
-  repeated  Sku Info = 10;
-}
-
-message UpdateSkuResponse{
- repeated   Sku Info =10;
 }
 
 
