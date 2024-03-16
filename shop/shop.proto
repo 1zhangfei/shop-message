@@ -126,8 +126,9 @@ message GetGoodsInfoRequest {
     int64 GoodsId = 10;
 }
 
+//查询一个商品的所有商品信息的返回值
 message GetGoodsInfoResponse{
-  ProductInfo Info = 10;
+  ProductInfos Info = 10;
 }
 
 
