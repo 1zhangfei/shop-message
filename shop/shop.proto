@@ -58,6 +58,30 @@ message SkuInfos{
   string NormsThree  = 40;
 }
 
+message NormsInfo{
+  int64 NormsId   = 10;
+  string NormsName = 20;
+}
+
+message NormInfo{
+    int64  NormId       = 10;
+    string NormName     = 20;
+ repeated NormsInfo Info = 30;
+}
+
+message SkuInfo {
+           int64  SkuId   = 10;
+ repeated  int64  NormsId = 20;
+           string Price   = 40;
+           int64  Stock   = 50;
+}
+
+message ProductInfos {
+ repeated NormInfo Info = 10;
+repeated  SkuInfo  In   = 20;
+}
+
+
 
 message CreateGoodsRequest {
   GoodsInfo Info = 10;
